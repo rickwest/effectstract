@@ -4,6 +4,7 @@ namespace App\Services\TextExtraction;
 
 use App\Exceptions\TextExtractionException;
 use AWS;
+use Aws\Textract\TextractClient;
 use Exception;
 
 class AwsTextExtraction implements TextExtraction
@@ -11,12 +12,16 @@ class AwsTextExtraction implements TextExtraction
     public function extract(string $document): TextExtractionResult
     {
         try {
-            $result = AWS::createClient('textract')->detectDocumentText([
+            /** @var TextractClient $client */
+            $client = AWS::createClient('textract');
+
+            $result = $client->detectDocumentText([
                 'Document' => [
                     'Bytes' => base64_decode($document),
                 ],
             ]);
 
+            /** @phpstan-ignore-next-line **/
             $blocks = collect($result->get('Blocks'));
 
             return new TextExtractionResult(

@@ -10,6 +10,9 @@ class ExtractTextTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * @covers \App\Http\Controllers\ExtractText
+     */
     public function test_extract_text_response(): void
     {
         $this->postJson('/api/extract-text', ['document' => $this->base64Pdf()])
@@ -24,12 +27,18 @@ class ExtractTextTest extends TestCase
             ]);
     }
 
+    /**
+     * @covers \App\Http\Controllers\ExtractText
+     */
     public function test_extract_text_missing_document_throws_validation_exception(): void
     {
         $this->postJson('/api/extract-text')
             ->assertInvalid(['document']);
     }
 
+    /**
+     * @covers \App\Http\Controllers\ExtractText
+     */
     public function test_extract_text_text_is_stored(): void
     {
         $this->postJson('/api/extract-text', [
@@ -47,7 +56,10 @@ class ExtractTextTest extends TestCase
         ], ExtractedText::first()->text);
     }
 
-    public function test_extract_text_invalid_document_throws_exception()
+    /**
+     * @covers \App\Http\Controllers\ExtractText
+     */
+    public function test_extract_text_invalid_document_throws_exception(): void
     {
         $this->postJson('/api/extract-text', ['document' => '123'])
             ->assertServerError();

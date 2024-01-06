@@ -4,6 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property-read string $document
+ */
 class ExtractTextRequest extends FormRequest
 {
     /**
