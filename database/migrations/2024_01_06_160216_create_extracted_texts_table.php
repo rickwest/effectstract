@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('extracted_texts', function (Blueprint $table) {
             $table->id();
-            $table->text('text');
+            $table->json('text');
             $table->timestamps();
         });
     }

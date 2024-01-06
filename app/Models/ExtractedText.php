@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExtractedText extends Model
 {
-    protected $fillable = ['text'];
+    protected $fillable = [
+        'text'
+    ];
+
+    protected $casts = [
+        'text' => 'array',
+    ];
 }

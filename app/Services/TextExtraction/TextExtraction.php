@@ -2,7 +2,12 @@
 
 namespace App\Services\TextExtraction;
 
+use App\Exceptions\TextExtractionException;
+
 interface TextExtraction
 {
-    public function extract($document): string;
+    /**
+     * @throws TextExtractionException
+     */
+    public function extract(string $document): TextExtractionResult;
 }

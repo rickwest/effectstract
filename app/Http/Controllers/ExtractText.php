@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\TextExtractionException;
 use App\Http\Requests\ExtractTextRequest;
 use App\Http\Resources\ExtractedTextResource;
 use App\Models\ExtractedText;
@@ -13,11 +14,14 @@ class ExtractText extends Controller
     {
     }
 
-    public function __invoke(ExtractTextRequest $request)
+    /**
+     * @throws TextExtractionException
+     */
+    public function __invoke(ExtractTextRequest $request): ExtractedTextResource
     {
         return new ExtractedTextResource(
             ExtractedText::create([
-                'text' => $this->extractor->extract('')
+                'text' => $this->extractor->extract($request->document)
             ])
         );
     }
