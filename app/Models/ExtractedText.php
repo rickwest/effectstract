@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ExtractedText extends Model
 {
     protected $fillable = [
-        'text'
+        'text',
     ];
 
     protected $casts = [

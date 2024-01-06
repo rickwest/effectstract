@@ -18,9 +18,9 @@ class ExtractTextTest extends TestCase
                 'data' => [
                     'text' => [
                         'lines' => ['Some text to extract'],
-                        'words' => ['Some', 'text', 'to', 'extract']
-                    ]
-                ]
+                        'words' => ['Some', 'text', 'to', 'extract'],
+                    ],
+                ],
             ]);
     }
 
@@ -33,7 +33,7 @@ class ExtractTextTest extends TestCase
     public function test_extract_text_text_is_stored(): void
     {
         $this->postJson('/api/extract-text', [
-            'document' => $this->base64Pdf()
+            'document' => $this->base64Pdf(),
         ])->assertCreated();
 
         $this->assertDatabaseCount(ExtractedText::class, 1);
@@ -43,7 +43,7 @@ class ExtractTextTest extends TestCase
         // Not worth sinking time into, so this will suffice for now.
         $this->assertEquals([
             'lines' => ['Some text to extract'],
-            'words' => ['Some', 'text', 'to', 'extract']
+            'words' => ['Some', 'text', 'to', 'extract'],
         ], ExtractedText::first()->text);
     }
 
@@ -56,7 +56,7 @@ class ExtractTextTest extends TestCase
     public function base64Pdf(): string
     {
         return base64_encode(
-            file_get_contents(__DIR__ .'/extract.pdf')
+            file_get_contents(__DIR__.'/extract.pdf')
         );
     }
 }

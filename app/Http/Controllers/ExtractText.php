@@ -21,7 +21,7 @@ class ExtractText extends Controller
     {
         return new ExtractedTextResource(
             ExtractedText::create([
-                'text' => $this->extractor->extract($request->document)
+                'text' => $this->extractor->extract($request->document),
             ])
         );
     }
