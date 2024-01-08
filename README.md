@@ -84,6 +84,8 @@ For example:
 
 **Text Extraction Interface** - Although only a single implementation required in this case, for this kind of work and integration with a third party it makes sense to implement a generic interface and bind the implementation to the interface. This will make it much easier should it be necessary to change the third party text extraction service in future.
 
-**Utilise Queue** - Depending on the required implementation, for example, if the extracted text is not required in the response then it would be more performance to push the text extraction to a queued job rather than doiests** - The tests hit AWS. Again this is probably not desirable especially on larger application or when running tests on CI. Unnecessarily hitting a third party during testing has a negative performance and cost impact. It might still be worth hitting a third party with a few tests to ensure no changes to the desired outcome in some instances, but mocking the third party would make sense rather than testing something that is outside our control.
+**Utilise Queue** - Depending on the required implementation, for example, if the extracted text is not required in the response then it would be more performant to push the text extraction to a queued job rather than doing it during the request lifecycle.
+
+**Testing** - The tests hit AWS. Again this is probably not desirable especially on larger application or when running tests on CI. Unnecessarily hitting a third party during testing has a negative performance and cost impact. It might still be worth hitting a third party with a few tests to ensure no changes to the desired outcome in some instances, but mocking the third party would make sense rather than testing something that is outside developer control.
 
 **Error Handling** - Might want to more gracefully handle exceptions etc
